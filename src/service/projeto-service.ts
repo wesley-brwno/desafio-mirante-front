@@ -1,20 +1,28 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cidade } from '@domain/cidade';
-import { Observable, from } from 'rxjs';
+import { Observable, catchError, from, map } from 'rxjs';
     
 @Injectable()
 export class ProjetoService {
+
+    API_URL: string = "http://localhost:8080/mirante/cidades";
 
     constructor(private http: HttpClient) {}
 
     //------------------------------------------------
     /** Recupera a lista de cidades */
     //------------------------------------------------
-    pesquisarCidades(): Observable<any> {
-        // TODO: chamar backend, ao invés de retornar uma lista fake
-        return from(Promise.resolve(this.getListaCidadesMock()));
-    }    
+    pesquisarCidades(): Observable<Cidade[]> {
+        return this.http.get<Cidade[]>(this.API_URL).pipe(
+            map(response => {                
+                return response;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                throw new Error(error.message);
+            })
+        )
+    }
 
     //------------------------------------------------
     /** Exclui a cidade informada */
