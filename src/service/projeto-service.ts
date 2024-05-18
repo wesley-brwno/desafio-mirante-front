@@ -39,11 +39,21 @@ export class ProjetoService {
     /** Salva a cidade informada */
     //------------------------------------------------    
     salvar(cidade: Cidade): Observable<any> {
-        return this.http.post<Cidade>(this.API_URL, cidade).pipe(
-            catchError((error: HttpErrorResponse) => {
-                throw new Error(error.message);
-            })
-        )
+        if(cidade.id) {
+            return this.http.put<Cidade>(this.API_URL, cidade).pipe(
+                map(response => response),
+                catchError((error: HttpErrorResponse) => {
+                    throw new Error(error.message);
+                })
+            )
+        } else {
+            return this.http.post<Cidade>(this.API_URL, cidade).pipe(
+                map(response => response),
+                catchError((error: HttpErrorResponse) => {
+                    throw new Error(error.message);
+                })
+            )
+        }
     }
 
     //------------------------------------------------
