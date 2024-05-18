@@ -28,8 +28,11 @@ export class ProjetoService {
     /** Exclui a cidade informada */
     //------------------------------------------------
     excluir(cidade: Cidade): Observable<any> {        
-        // TODO: chamar backend
-        return null;
+        return this.http.delete(`${this.API_URL}/${cidade.id}`).pipe(
+            catchError((error: HttpErrorResponse) => {
+                throw new Error(error.message);
+            })
+        )
     }
 
     //------------------------------------------------
