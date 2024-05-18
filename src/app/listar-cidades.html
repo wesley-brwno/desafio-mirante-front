@@ -14,19 +14,19 @@
         [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template pTemplate="header">
                 <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Quantity</th>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>UF</th>
+                    <th>Capital</th>
                     <th>Ação</th>                    
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-cidade>
                 <tr>
-                    <td>{{ cidade.code }}</td>
-                    <td>{{ cidade.name }}</td>
-                    <td>{{ cidade.category }}</td>
-                    <td>{{ cidade.quantity }}</td>
+                    <td>{{ cidade.id }}</td>
+                    <td>{{ cidade.nome }}</td>
+                    <td>{{ cidade.uf }}</td>
+                    <td>{{ cidade.capital }}</td>
                     <td style="width: 250px;"> 
                         <p-button (click)="abreJanelaParaAlterarCidade(cidade)" label="Alterar"></p-button> 
                         &nbsp;
