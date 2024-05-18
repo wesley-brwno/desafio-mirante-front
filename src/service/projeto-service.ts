@@ -36,8 +36,11 @@ export class ProjetoService {
     /** Salva a cidade informada */
     //------------------------------------------------    
     salvar(cidade: Cidade): Observable<any> {
-        // TODO: chamar backend
-        return null;
+        return this.http.post<Cidade>(this.API_URL, cidade).pipe(
+            catchError((error: HttpErrorResponse) => {
+                throw new Error(error.message);
+            })
+        )
     }
 
     //------------------------------------------------
